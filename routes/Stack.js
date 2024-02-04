@@ -2,6 +2,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from "../screens/RegisterScreen"
 
 const Stack = () => {
     const Stack = createNativeStackNavigator();
@@ -18,7 +20,7 @@ const Stack = () => {
           component={RegisterScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Main"
           component={BottomTabs}
           options={{ headerShown: false }}
@@ -42,7 +44,7 @@ const Stack = () => {
           name="Confirm"
           component={ConfirmationScreen}
           options={{ headerShown: false }}
-        />
+        /> */}
 
         
       </Stack.Navigator>

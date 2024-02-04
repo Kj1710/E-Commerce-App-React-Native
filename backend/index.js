@@ -13,17 +13,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const jwt = require("jsonwebtoken");
-app.listen(port, () => {
-  console.log("Server is running on port 8000");
-});
 
 mongoose
-  .connect("mongodb+srv://kjha7865:1234@kaushal.k2pbrwj.mongodb.net/", {
-  
-  })
+  .connect("mongodb+srv://kjha7865:1234@kaushal.k2pbrwj.mongodb.net/", {})
   .then(() => {
     console.log("Connected to MongoDB");
   })
   .catch((err) => {
     console.log("Error connecting to MongoDb", err);
   });
+
+app.listen(port, () => {
+  console.log("Server is running on port 8000");
+});
