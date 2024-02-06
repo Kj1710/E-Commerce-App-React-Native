@@ -10,13 +10,12 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 const RegisterScreen = () => {
-  const [name, setName] = useState("");
+ 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
@@ -80,7 +79,7 @@ const RegisterScreen = () => {
               color: "#041E42",
             }}
           >
-            Register to your Account
+            LogIn to your Account
           </Text>
         </View>
 

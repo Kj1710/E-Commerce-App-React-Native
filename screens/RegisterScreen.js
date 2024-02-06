@@ -215,7 +215,7 @@ const RegisterScreen = () => {
               fontWeight: "bold",
             }}
           >
-            Login
+          Register
           </Text>
         </Pressable>
 
