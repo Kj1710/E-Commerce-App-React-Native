@@ -7,7 +7,7 @@ const nodemailer = require("nodemailer");
 const app = express();
 const port = 8000;
 const cors = require("cors");
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 const jwt = require("jsonwebtoken");
 
 mongoose
-  .connect("mongodb+srv://kjha7865:1234@kaushal.k2pbrwj.mongodb.net/", {})
+  .connect("mongodb+srv://kjha7865:1234@cluster0.mon3qjn.mongodb.net/", {})
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -23,12 +23,9 @@ mongoose
     console.log("Error connecting to MongoDb", err);
   });
 
-
-
 app.listen(port, () => {
   console.log("Server is running on port 8000");
 });
-
 
 const User = require("./models/user.models");
 const Order = require("./models/orders.models");
@@ -46,10 +43,10 @@ const sendVerificationEmail = async (email, verificationToken) => {
 
   // Compose the email message
   const mailOptions = {
-    from: "Kjha7865@gmail.com",
+    from: "Kaushal",
     to: email,
-    subject: "Email Verification",
-    text: `Please click the following link to verify your email: http://localhost:8000/verify/${verificationToken}`,
+    subject: "Email Verification For E Commerce App",
+    text: `Please click the following link to verify your email:  http://192.168.29.184:8000/verify/${verificationToken}`,
   };
 
   // Send the email
@@ -77,12 +74,14 @@ app.get("/verify/:token", async (req, res) => {
 
     await user.save();
 
-    res.status(200).json({ message: "Email verified successfully" });
+    res.status(200).json({
+      message:
+        "Email verified successfully , Go Back And Login with with ur email id and password",
+    });
   } catch (error) {
     res.status(500).json({ message: "Email Verificatioion Failed" });
   }
 });
-
 
 const generateSecretKey = () => {
   const secretKey = crypto.randomBytes(32).toString("hex");
@@ -100,8 +99,10 @@ app.post("/register", async (req, res) => {
     // Check if the email is already registered
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      console.log("Email already registered:", email); // Debugging statement
-      return res.status(400).json({ message: "Email already registered" });
+      console.log("Email already registered:", email);
+      return res.status(400).json({
+        message: `${email} is already Registered , login with the email id`,
+      });
     }
 
     // Create a new user
@@ -129,8 +130,6 @@ app.post("/register", async (req, res) => {
     res.status(500).json({ message: "Registration failed" });
   }
 });
-
-
 
 //endpoint to login the user!
 app.post("/login", async (req, res) => {

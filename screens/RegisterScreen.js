@@ -3,55 +3,57 @@ import {
   Text,
   View,
   SafeAreaView,
+  Pressable,
   Image,
   KeyboardAvoidingView,
   TextInput,
-  Pressable,
-} from "react-native";
+  Alert,
+} from "react-native"
 import React, { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const RegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const token = await AsyncStorage.getItem("authToken");
 
-        if (token) {
-          navigation.replace("Main");
-        }
-      } catch (err) {
-        console.log("error message", err);
-      }
-    };
-    checkLoginStatus();
-  }, []);
-  const handleLogin = () => {
+  const handleRegister = () => {
     const user = {
+      name: name,
       email: email,
       password: password,
     };
-    axios
-      .post("http://localhost:8000/login", user)
-      .then((response) => {
-        console.log(response);
-        const token = response.data.token;
-        AsyncStorage.setItem("authToken", token);
-        navigation.replace("Main");
-      })
-      .catch((error) => {
-        Alert.alert("Login Error", "Invalid Email");
-        console.log(error);
-      });
-  };
+   // send a POST  request to the backend API to register the user
+   axios
+   .post("http://192.168.29.184:8000/register", user)
+   .then((response) => {
+     console.log(response);
+     Alert.alert(
+       "Registration successful!!",
+       "Please Verify Your Email Id a Verfication Link has been send to the Registed Email Id"
+       
+     );
+     setName("");
+     setEmail("");
+     setPassword("");
+   })
+   .catch((error) => {
+     Alert.alert(
+       "Registration Error",
+       "An error occurred while registering"
+     );
+     setName("");
+     setEmail("");
+     setPassword("");
+     console.log("registration failed", error);
+   });
+};
   return (
     <SafeAreaView
       style={{
@@ -159,7 +161,7 @@ const RegisterScreen = () => {
             }}
           >
             <FontAwesome5
-              style={{ marginLeft: 10}}
+              style={{ marginLeft: 10 }}
               name="lock"
               size={20}
               color="red"
@@ -197,7 +199,7 @@ const RegisterScreen = () => {
 
         <View style={{ marginTop: 40 }} />
         <Pressable
-          onPress={handleLogin}
+          onPress={handleRegister}
           style={{
             width: 200,
             backgroundColor: "red",
@@ -215,7 +217,7 @@ const RegisterScreen = () => {
               fontWeight: "bold",
             }}
           >
-          Register
+            Register
           </Text>
         </Pressable>
 
