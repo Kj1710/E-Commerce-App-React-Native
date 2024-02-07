@@ -139,7 +139,7 @@ app.post("/login", async (req, res) => {
     //check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email , PLease Register First" });
     }
 
     //check if the password is correct

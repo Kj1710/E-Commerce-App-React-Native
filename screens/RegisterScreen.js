@@ -36,7 +36,7 @@ const RegisterScreen = () => {
      console.log(response);
      Alert.alert(
        "Registration successful!!",
-       "Please Verify Your Email Id a Verfication Link has been send to the Registed Email Id"
+       "Please Verify Your Email Id , a Verfication Link has been send to Your Registred Email Id"
        
      );
      setName("");
