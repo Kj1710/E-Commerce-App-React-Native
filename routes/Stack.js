@@ -62,11 +62,26 @@ const Stack = () => {
               ),
           }}
         />
+
+        <Tab.Screen
+          name="Menu"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: "Menu",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <Entypo name="menu" size={24} color="#008E97" />
+              ) : (
+                <AntDesign name="menu-fold" size={24} color="black" />
+              ),
+          }}
+        />
       </Tab.Navigator>
     );
   }
-    
-   
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
