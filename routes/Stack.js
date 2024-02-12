@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-
+import ProductInfoScreen from "../screens/ProductInfoScreen";
 
 const Stack = () => {
   const Stack = createNativeStackNavigator();
