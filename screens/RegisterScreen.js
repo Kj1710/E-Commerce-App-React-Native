@@ -51,7 +51,12 @@ const RegisterScreen = () => {
   };
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white", alignItems: "center",marginTop:50  }}
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+        alignItems: "center",
+        marginTop: 50,
+      }}
     >
       <View>
         <Image
@@ -89,7 +94,7 @@ const RegisterScreen = () => {
             }}
           >
             <Ionicons
-              name="ios-person"
+              name="person-sharp"
               size={24}
               color="gray"
               style={{ marginLeft: 8 }}
@@ -184,7 +189,7 @@ const RegisterScreen = () => {
           <Text>Keep me logged in</Text>
 
           <Text style={{ color: "#007FFF", fontWeight: "500" }}>
-            Forgot Password
+            Forgot Password?
           </Text>
         </View>
 
