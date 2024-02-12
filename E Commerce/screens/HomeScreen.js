@@ -17,16 +17,16 @@ import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { SliderBox } from "react-native-image-slider-box";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
+import ProductItem from "../components/ProductItem";
 import DropDownPicker from "react-native-dropdown-picker";
+import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { UserType } from "../UserContext";
 import jwt_decode from "jwt-decode";
-import ProductItem from "../components/productItem";
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
   const list = [
     {
       id: "0",
@@ -63,13 +63,11 @@ const HomeScreen = () => {
       name: "Fashion",
     },
   ];
-
   const images = [
     "https://img.etimg.com/thumb/msid-93051525,width-1070,height-580,imgsize-2243475,overlay-economictimes/photo.jpg",
     "https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/devjyoti/PD23/Launches/Updated_ingress1242x550_3.gif",
     "https://images-eu.ssl-images-amazon.com/images/G/31/img23/Books/BB/JULY/1242x550_Header-BB-Jul23.jpg",
   ];
-
   const deals = [
     {
       id: "20",
@@ -198,9 +196,8 @@ const HomeScreen = () => {
       size: "8GB RAM, 128GB Storage",
     },
   ];
-
   const [products, setProducts] = useState([]);
-  
+  const navigation = useNavigation();
   const [open, setOpen] = useState(false);
   const [addresses, setAddresses] = useState([]);
   const [category, setCategory] = useState("jewelery");
@@ -213,7 +210,6 @@ const HomeScreen = () => {
     { label: "electronics", value: "electronics" },
     { label: "women's clothing", value: "women's clothing" },
   ]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -226,24 +222,21 @@ const HomeScreen = () => {
 
     fetchData();
   }, []);
-
   const onGenderOpen = useCallback(() => {
     setCompanyOpen(false);
   }, []);
 
   const cart = useSelector((state) => state.cart.cart);
-
   const [modalVisible, setModalVisible] = useState(false);
   useEffect(() => {
     if (userId) {
       fetchAddresses();
     }
   }, [userId, modalVisible]);
-
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/addresses/${userId}`
+        `http://192.168.29.184:8000/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -252,7 +245,6 @@ const HomeScreen = () => {
       console.log("error", error);
     }
   };
-
   useEffect(() => {
     const fetchUser = async () => {
       const token = await AsyncStorage.getItem("authToken");
@@ -260,16 +252,15 @@ const HomeScreen = () => {
       const userId = decodedToken.userId;
       setUserId(userId);
     };
+
     fetchUser();
   }, []);
-
   console.log("address", addresses);
-
   return (
     <>
       <SafeAreaView
         style={{
-          paddingTop: Platform.OS === "android" ? 40 : 0,
+          paddinTop: Platform.OS === "android" ? 40 : 0,
           flex: 1,
           backgroundColor: "white",
         }}
@@ -306,6 +297,7 @@ const HomeScreen = () => {
 
             <Feather name="mic" size={24} color="black" />
           </View>
+
           <Pressable
             onPress={() => setModalVisible(!modalVisible)}
             style={{
@@ -319,19 +311,20 @@ const HomeScreen = () => {
             <Ionicons name="location-outline" size={24} color="black" />
 
             <Pressable>
-              {/* {selectedAddress ? (
+            {selectedAddress ? (
                 <Text>
                   Deliver to {selectedAddress?.name} - {selectedAddress?.street}
                 </Text>
-              ) : ( */}
-              <Text style={{ fontSize: 13, fontWeight: "500" }}>
-                Add a Address
-              </Text>
-              {/* )} */}
+              ) : (
+                <Text style={{ fontSize: 13, fontWeight: "500" }}>
+                    Add a Address
+                </Text>
+              )}
             </Pressable>
 
             <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
           </Pressable>
+
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {list.map((item, index) => (
               <Pressable
@@ -360,6 +353,7 @@ const HomeScreen = () => {
               </Pressable>
             ))}
           </ScrollView>
+
           <SliderBox
             images={images}
             autoPlay
@@ -369,17 +363,10 @@ const HomeScreen = () => {
             ImageComponentStyle={{ width: "100%" }}
           />
 
-          <Text
-            style={{
-              height: 1,
-              borderColor: "#D0D0D0",
-              borderWidth: 2,
-              marginTop: 15,
-            }}
-          />
           <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
             Trending Deals of the week
           </Text>
+
           <View
             style={{
               flexDirection: "row",
@@ -414,6 +401,7 @@ const HomeScreen = () => {
               </Pressable>
             ))}
           </View>
+
           <Text
             style={{
               height: 1,
@@ -422,9 +410,11 @@ const HomeScreen = () => {
               marginTop: 15,
             }}
           />
+
           <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
             Today's Deals
           </Text>
+
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {offers.map((item, index) => (
               <Pressable
@@ -450,6 +440,7 @@ const HomeScreen = () => {
                   style={{ width: 150, height: 150, resizeMode: "contain" }}
                   source={{ uri: item?.image }}
                 />
+
                 <View
                   style={{
                     backgroundColor: "#E31837",
@@ -475,6 +466,7 @@ const HomeScreen = () => {
               </Pressable>
             ))}
           </ScrollView>
+
           <Text
             style={{
               height: 1,
@@ -483,7 +475,8 @@ const HomeScreen = () => {
               marginTop: 15,
             }}
           />
-           <View
+
+          <View
             style={{
               marginHorizontal: 10,
               marginTop: 20,
@@ -498,7 +491,7 @@ const HomeScreen = () => {
                 marginBottom: open ? 120 : 15,
               }}
               open={open}
-              value={category}
+              value={category} //genderValue
               items={items}
               setOpen={setOpen}
               setValue={setCategory}
@@ -511,6 +504,7 @@ const HomeScreen = () => {
               zIndexInverse={1000}
             />
           </View>
+
           <View
             style={{
               flexDirection: "row",

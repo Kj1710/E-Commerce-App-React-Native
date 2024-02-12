@@ -2,9 +2,11 @@
 
 # dependencies
 node_modules/
-backend/.env
-backend/node_modules
-backend/models
+models
+api/index.js
+navigation
+redux
+UserContext.js
 
 # Expo
 .expo/

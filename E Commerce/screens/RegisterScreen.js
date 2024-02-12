@@ -3,68 +3,61 @@ import {
   Text,
   View,
   SafeAreaView,
+  Pressable,
   Image,
   KeyboardAvoidingView,
   TextInput,
-  Pressable,
+  Alert,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import axios from "axios";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const navigation = useNavigation();
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const token = await AsyncStorage.getItem("authToken");
-
-        if (token) {
-          navigation.replace("Main");
-        }
-      } catch (err) {
-        console.log("error message", err);
-      }
-    };
-    checkLoginStatus();
-  }, []);
-  const handleLogin = () => {
+  const handleRegister = () => {
     const user = {
+      name: name,
       email: email,
       password: password,
     };
+
+    // send a POST  request to the backend API to register the user
     axios
-      .post("http://192.168.29.184:8000/login", user)
+      .post("http://192.168.29.184:8000/register", user)
       .then((response) => {
         console.log(response);
-        const token = response.data.token;
-        AsyncStorage.setItem("authToken", token);
-        navigation.replace("Main");
+        Alert.alert(
+          "Registration successful",
+          "You have been registered Successfully"
+        );
+        setName("");
+        setEmail("");
+        setPassword("");
       })
       .catch((error) => {
-        Alert.alert("Login Error", "Invalid Email");
-        console.log(error);
+        Alert.alert(
+          "Registration Error",
+          "An error occurred while registering"
+        );
+        console.log("registration failed", error);
       });
   };
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "white",
-        alignItems: "center",
-        marginTop: 50,
-      }}
+      style={{ flex: 1, backgroundColor: "white", alignItems: "center",marginTop:50  }}
     >
       <View>
         <Image
-          style={{ width: 120, height: 120, marginTop: 10 }}
+          style={{ width: 150, height: 100 }}
           source={{
-            uri: "https://imgs.search.brave.com/AqVgRE5pJZMRGHEXn5TNptqO6wjdFlny3grFM870fLo/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvcHJldmll/dy0xeC81OC83NC9p/bml0aWFsLWxldHRl/ci1qay1vci1rai1s/b2dvLXRlbXBsYXRl/LXdpdGgtdmludGFn/ZS12ZWN0b3ItMzE5/NDU4NzQuanBn",
+            uri: "https://assets.stickpng.com/thumbs/6160562276000b00045a7d97.png",
           }}
         />
       </View>
@@ -79,11 +72,11 @@ const RegisterScreen = () => {
               color: "#041E42",
             }}
           >
-            LogIn to your Account
+            Register to your Account
           </Text>
         </View>
 
-        <View style={{ marginTop: 50 }}>
+        <View style={{ marginTop: 70 }}>
           <View
             style={{
               flexDirection: "row",
@@ -91,7 +84,37 @@ const RegisterScreen = () => {
               gap: 5,
               backgroundColor: "#D0D0D0",
               paddingVertical: 5,
-              borderRadius: 60,
+              borderRadius: 5,
+              marginTop: 30,
+            }}
+          >
+            <Ionicons
+              name="ios-person"
+              size={24}
+              color="gray"
+              style={{ marginLeft: 8 }}
+            />
+            <TextInput
+              value={name}
+              onChangeText={(text) => setName(text)}
+              style={{
+                color: "gray",
+                marginVertical: 10,
+                width: 300,
+                fontSize: name ? 16 : 16,
+              }}
+              placeholder="enter your name"
+            />
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+              backgroundColor: "#D0D0D0",
+              paddingVertical: 5,
+              borderRadius: 5,
               marginTop: 30,
             }}
           >
@@ -99,40 +122,40 @@ const RegisterScreen = () => {
               style={{ marginLeft: 8 }}
               name="email"
               size={24}
-              color="red"
+              color="gray"
             />
 
             <TextInput
               value={email}
               onChangeText={(text) => setEmail(text)}
               style={{
-                color: "black",
+                color: "gray",
                 marginVertical: 10,
                 width: 300,
-                fontSize: email ? 16 : 16,
+                fontSize: password ? 16 : 16,
               }}
-              placeholder="Enter your Email"
+              placeholder="enter your Email"
             />
           </View>
         </View>
 
-        <View style={{ marginTop: 5 }}>
+        <View>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
-              gap: 7,
+              gap: 5,
               backgroundColor: "#D0D0D0",
               paddingVertical: 5,
-              borderRadius: 60,
+              borderRadius: 5,
               marginTop: 30,
             }}
           >
-            <FontAwesome5
-              style={{ marginLeft: 10 }}
-              name="lock"
-              size={20}
-              color="red"
+            <AntDesign
+              name="lock1"
+              size={24}
+              color="gray"
+              style={{ marginLeft: 8 }}
             />
 
             <TextInput
@@ -140,12 +163,12 @@ const RegisterScreen = () => {
               onChangeText={(text) => setPassword(text)}
               secureTextEntry={true}
               style={{
-                color: "black",
+                color: "gray",
                 marginVertical: 10,
                 width: 300,
-                fontSize: password ? 16 : 16,
+                fontSize: email ? 16 : 16,
               }}
-              placeholder="Enter your Password"
+              placeholder="enter your Password"
             />
           </View>
         </View>
@@ -161,16 +184,17 @@ const RegisterScreen = () => {
           <Text>Keep me logged in</Text>
 
           <Text style={{ color: "#007FFF", fontWeight: "500" }}>
-            Forgot Password ?
+            Forgot Password
           </Text>
         </View>
 
-        <View style={{ marginTop: 40 }} />
+        <View style={{ marginTop: 80 }} />
+
         <Pressable
-          onPress={handleLogin}
+          onPress={handleRegister}
           style={{
             width: 200,
-            backgroundColor: "red",
+            backgroundColor: "#FEBE10",
             borderRadius: 6,
             marginLeft: "auto",
             marginRight: "auto",
@@ -185,16 +209,16 @@ const RegisterScreen = () => {
               fontWeight: "bold",
             }}
           >
-            Login
+            Register
           </Text>
         </Pressable>
 
         <Pressable
-          onPress={() => navigation.navigate("Register")}
+          onPress={() => navigation.goBack()}
           style={{ marginTop: 15 }}
         >
           <Text style={{ textAlign: "center", color: "gray", fontSize: 16 }}>
-            Don't have an account? Sign Up
+            Already have an account? Sign In
           </Text>
         </Pressable>
       </KeyboardAvoidingView>
