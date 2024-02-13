@@ -20,6 +20,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  const logoImage = require("../assets/KJ1.jpg");
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
@@ -59,10 +60,8 @@ const LoginScreen = () => {
     >
       <View>
         <Image
-          style={{ width: 150, height: 100 }}
-          source={{
-            uri: "",
-          }}
+          style={{ width: 200, height: 180 }}
+          source={logoImage}
         />
       </View>
 
@@ -76,11 +75,11 @@ const LoginScreen = () => {
               color: "#041E42",
             }}
           >
-            Login In to your Account
+            Log In To Your Account
           </Text>
         </View>
 
-        <View style={{ marginTop: 70 }}>
+        <View style={{ marginTop: 20 }}>
           <View
             style={{
               flexDirection: "row",
@@ -155,14 +154,14 @@ const LoginScreen = () => {
             justifyContent: "space-between",
           }}
         >
-          <Text>Keep me logged in</Text>
+          <Text></Text>
 
           <Text style={{ color: "#007FFF", fontWeight: "500" }}>
-            Forgot Password
+            Forgot Password?
           </Text>
         </View>
 
-        <View style={{ marginTop: 80 }} />
+        <View style={{ marginTop: 20 }} />
 
         <Pressable
           onPress={handleLogin}

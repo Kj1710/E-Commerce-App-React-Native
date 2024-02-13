@@ -22,6 +22,7 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const navigation = useNavigation();
+  const logoImage = require("../assets/KJ1.jpg");
   const handleRegister = () => {
     const user = {
       name: name,
@@ -35,8 +36,8 @@ const RegisterScreen = () => {
       .then((response) => {
         console.log(response);
         Alert.alert(
-          "Registration successful",
-          "You have been registered Successfully"
+          "Registration successful!!",
+          "Please Verify Your Email Id , a Verfication Link has been send to Your Registred Email Id"
         );
         setName("");
         setEmail("");
@@ -54,12 +55,10 @@ const RegisterScreen = () => {
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white", alignItems: "center",marginTop:50  }}
     >
-      <View>
+       <View>
         <Image
-          style={{ width: 150, height: 100 }}
-          source={{
-            uri: "./assets/logo-black.png",
-          }}
+          style={{ width: 200, height: 180 }}
+          source={logoImage}
         />
       </View>
 
@@ -73,11 +72,11 @@ const RegisterScreen = () => {
               color: "#041E42",
             }}
           >
-            Register to your Account
+            Register To Your Account
           </Text>
         </View>
 
-        <View style={{ marginTop: 70 }}>
+        <View style={{ marginTop: 0 }}>
           <View
             style={{
               flexDirection: "row",
@@ -90,7 +89,7 @@ const RegisterScreen = () => {
             }}
           >
             <Ionicons
-              name="person-sharprson"
+              name="person-sharp"
               size={24}
               color="gray"
               style={{ marginLeft: 8 }}
@@ -104,7 +103,7 @@ const RegisterScreen = () => {
                 width: 300,
                 fontSize: name ? 16 : 16,
               }}
-              placeholder="enter your name"
+              placeholder="Enter your name"
             />
           </View>
 
@@ -135,7 +134,7 @@ const RegisterScreen = () => {
                 width: 300,
                 fontSize: password ? 16 : 16,
               }}
-              placeholder="enter your Email"
+              placeholder="Enter your Email"
             />
           </View>
         </View>
@@ -169,7 +168,7 @@ const RegisterScreen = () => {
                 width: 300,
                 fontSize: email ? 16 : 16,
               }}
-              placeholder="enter your Password"
+              placeholder="Enter your Password"
             />
           </View>
         </View>
@@ -182,14 +181,14 @@ const RegisterScreen = () => {
             justifyContent: "space-between",
           }}
         >
-          <Text>Keep me logged in</Text>
+          <Text></Text>
 
           <Text style={{ color: "#007FFF", fontWeight: "500" }}>
             Forgot Password?
           </Text>
         </View>
 
-        <View style={{ marginTop: 80 }} />
+        <View style={{ marginTop: 20 }} />
 
         <Pressable
           onPress={handleRegister}
