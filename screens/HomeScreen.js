@@ -9,6 +9,7 @@ import {
   TextInput,
   Image,
 } from "react-native";
+import PropTypes from "deprecated-react-native-prop-types";
 import { ViewPropTypes } from "deprecated-react-native-prop-types";
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Feather } from "@expo/vector-icons";
@@ -30,20 +31,13 @@ import jwt_decode from "jwt-decode";
 const HomeScreen = () => {
   const handleLogout = async () => {
     try {
-      // Clear authentication token or any other user-related data from AsyncStorage
       await AsyncStorage.removeItem("authToken");
-
-      // Clear user ID from context or state
       setUserId(null);
-
-      // Navigate to login screen or any other initial screen
-      // Replace 'Login' with the appropriate screen name
       navigation.navigate("Login");
     } catch (error) {
       console.error("Error logging out:", error);
     }
   };
-
 
   const list = [
     {
@@ -218,10 +212,10 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const [open, setOpen] = useState(false);
   const [addresses, setAddresses] = useState([]);
-  const [category, setCategory] = useState("jewelery");
+  const [category, setCategory] = useState("electronics");
   const { userId, setUserId } = useContext(UserType);
   const [selectedAddress, setSelectedAdress] = useState("");
-  const [selectedOption, setSelectedOption] = useState("ca"); // Initial state
+  const [selectedOption, setSelectedOption] = useState("All"); // Initial state
   console.log(selectedAddress);
   const [items, setItems] = useState([
     { label: "Men's clothing", value: "men's clothing" },
@@ -296,84 +290,47 @@ const HomeScreen = () => {
             <Text></Text>
             <AntDesign name="shoppingcart" size={24} color="black" />
           </View>
-
-          <Pressable
-            onPress={() => setSelectedOption("All")} // Set selected option to 'All'
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 5,
-              padding: 10,
-              backgroundColor:
-                selectedOption === "All" ? "orange" : "transparent", // Add hover effect
-            }}
-          >
-            <Text style={{ fontWeight: "bold", marginRight: 5 }}>All</Text>
-            <Text style={{ fontWeight: "bold", marginRight: 5 }}>
-              Categories
-            </Text>
-            <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
-          </Pressable>
-
-          <Pressable
-            onPress={() => setModalVisible(!modalVisible)}
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 5,
-              padding: 10,
-              backgroundColor: "",
-            }}
-          >
-            <Ionicons name="location-outline" size={24} color="black" />
-
-            <Pressable>
-              {selectedAddress ? (
-                <Text>
-                  Deliver to {selectedAddress?.name} - {selectedAddress?.street}
-                </Text>
-              ) : (
-                <Text style={{ fontSize: 13, fontWeight: "500" }}>
-                  Add a Address
-                </Text>
-              )}
+          <View style={{ flexDirection: "row" }}>
+            <Pressable
+              onPress={() => setSelectedOption("All")}
+              style={({ pressed }) => [
+                styles.option,
+                {
+                  borderBottomWidth: selectedOption === "All" ? 3: 0, // Add border bottom when selected
+                  borderBottomColor: "orange", // Color of the underline
+                },
+                pressed && { opacity: 0.8 }, // Reduce opacity when pressed
+              ]}
+            >
+              <Text style={styles.optionText}>All</Text>
             </Pressable>
-
-            <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
-          </Pressable>
+            <Pressable
+              onPress={() => setSelectedOption("Categories")}
+              style={({ pressed }) => [
+                styles.option,
+                {
+                  borderBottomWidth: selectedOption === "Categories" ? 3 : 0, // Add border bottom when selected
+                  borderBottomColor: "orange", // Color of the underline
+                },
+                pressed && { opacity: 0.8 }, // Reduce opacity when pressed
+              ]}
+            >
+              <Text style={styles.optionText}>Categories</Text>
+            </Pressable>
+          </View>
 
           {/* Conditionally render based on selected option */}
           {selectedOption === "All" ? (
             <>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {list.map((item, index) => (
-                  <Pressable
-                    key={index}
-                    style={{
-                      margin: 10,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Image
-                      style={{ width: 50, height: 50, resizeMode: "contain" }}
-                      source={{ uri: item.image }}
-                    />
-
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontSize: 12,
-                        fontWeight: "500",
-                        marginTop: 5,
-                      }}
-                    >
-                      {item?.name}
-                    </Text>
-                  </Pressable>
-                ))}
-              </ScrollView>
-
+              <Text
+                style={{
+                  height: 1,
+                  borderColor: "#D0D0D0",
+                  borderWidth: 2,
+                  marginTop: 2,
+                }}
+              />
+              <Text></Text>
               <SliderBox
                 images={images}
                 autoPlay
@@ -381,6 +338,14 @@ const HomeScreen = () => {
                 dotColor={"#13274F"}
                 inactiveDotColor="#90A4AE"
                 ImageComponentStyle={{ width: "100%" }}
+              />
+              <Text
+                style={{
+                  height: 1,
+                  borderColor: "#D0D0D0",
+                  borderWidth: 2,
+                  marginTop: 8,
+                }}
               />
 
               <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
@@ -494,7 +459,7 @@ const HomeScreen = () => {
                   height: 1,
                   borderColor: "#D0D0D0",
                   borderWidth: 2,
-                  marginTop: 15,
+                  marginTop: 2,
                 }}
               />
 
@@ -502,7 +467,7 @@ const HomeScreen = () => {
                 style={{
                   marginHorizontal: 10,
                   marginTop: 20,
-                  width: "45%",
+
                   marginBottom: open ? 50 : 15,
                 }}
               >
@@ -513,7 +478,7 @@ const HomeScreen = () => {
                     marginBottom: open ? 120 : 15,
                   }}
                   open={open}
-                  value={category} //genderValue
+                  value={category}
                   items={items}
                   setOpen={setOpen}
                   setValue={setCategory}
@@ -521,7 +486,6 @@ const HomeScreen = () => {
                   placeholder="choose category"
                   placeholderStyle={styles.placeholderStyles}
                   onOpen={onGenderOpen}
-                  // onChangeValue={onChange}
                   zIndex={3000}
                   zIndexInverse={1000}
                 />
@@ -537,7 +501,11 @@ const HomeScreen = () => {
                 {products
                   ?.filter((item) => item.category === category)
                   .map((item, index) => (
-                    <ProductItem item={item} key={index} />
+                    <ProductItem
+                      item={item}
+                      key={index}
+                      style={{ width: "20%" }}
+                    />
                   ))}
               </View>
             </>
@@ -699,4 +667,17 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  option: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    padding: 10,
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  optionText: {
+    fontWeight: "bold",
+    marginRight: 5,
+  },
+});
