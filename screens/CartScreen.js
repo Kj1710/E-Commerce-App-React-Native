@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
 } from "react-native";
+import { ViewPropTypes } from 'deprecated-react-native-prop-types'
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";

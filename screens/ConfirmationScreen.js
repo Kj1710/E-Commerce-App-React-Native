@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, ScrollView, Pressable,Alert } from "react-native";
+import { ViewPropTypes } from 'deprecated-react-native-prop-types'
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserType } from "../UserContext";

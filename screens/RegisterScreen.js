@@ -15,6 +15,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import { ViewPropTypes } from 'deprecated-react-native-prop-types'
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -51,18 +52,13 @@ const RegisterScreen = () => {
   };
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "white",
-        alignItems: "center",
-        marginTop: 50,
-      }}
+      style={{ flex: 1, backgroundColor: "white", alignItems: "center",marginTop:50  }}
     >
       <View>
         <Image
           style={{ width: 150, height: 100 }}
           source={{
-            uri: "https://assets.stickpng.com/thumbs/6160562276000b00045a7d97.png",
+            uri: "./assets/logo-black.png",
           }}
         />
       </View>
@@ -94,7 +90,7 @@ const RegisterScreen = () => {
             }}
           >
             <Ionicons
-              name="person-sharp"
+              name="person-sharprson"
               size={24}
               color="gray"
               style={{ marginLeft: 8 }}
