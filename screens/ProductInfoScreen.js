@@ -25,9 +25,7 @@ const ProductInfoScreen = () => {
   const [addedToCart, setAddedToCart] = useState(false);
   const height = (width * 100) / 100;
   const dispatch = useDispatch();
-  const handlePress = () => {
-    navigation.goBack();
-  };
+
   const addItemToCart = (item) => {
     setAddedToCart(true);
     dispatch(addToCart(item));
@@ -39,13 +37,16 @@ const ProductInfoScreen = () => {
   console.log(cart);
   return (
     <View style={{ flex: 1 }}>
-        <ScrollView
+      <ScrollView
         style={{ marginTop: 55, flex: 1, backgroundColor: "white" }}
         showsVerticalScrollIndicator={false}
       >
-      
         <View style={styles.header}>
-          <TouchableOpacity onPress={handlePress}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
             <Ionicons name="chevron-back" size={24} color="black" />
           </TouchableOpacity>
           <Pressable>
@@ -60,7 +61,6 @@ const ProductInfoScreen = () => {
             borderWidth: 2,
           }}
         />
-      
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {route.params.carouselImages.map((item, index) => (
@@ -133,7 +133,7 @@ const ProductInfoScreen = () => {
                   marginBottom: 20,
                 }}
               >
-                <AntDesign name="hearto" size={24} color="black" />
+               
               </View>
             </ImageBackground>
           ))}
@@ -196,9 +196,7 @@ const ProductInfoScreen = () => {
           >
             <Ionicons name="location" size={24} color="black" />
 
-            <Text style={{ fontSize: 15, fontWeight: "500" }}>
-              Deliver To Sujan - Bangalore 560019
-            </Text>
+            <Text style={{ fontSize: 15, fontWeight: "500" }}>Address</Text>
           </View>
         </View>
 
@@ -207,24 +205,19 @@ const ProductInfoScreen = () => {
         >
           IN Stock
         </Text>
-        </ScrollView>
+      </ScrollView>
 
-        <View style={styles.bottomButtons}>
-          <Pressable
-            onPress={() => addItemToCart(route?.params?.item)}
-            style={[styles.button, { backgroundColor: "#FFC72C" }]}
-          >
-            {addedToCart ? (
-              <Text>Added to Cart</Text>
-            ) : (
-              <Text>Add to Cart</Text>
-            )}
-          </Pressable>
-          <Pressable style={[styles.button, { backgroundColor: "#FFAC1C" }]}>
-            <Text>Buy Now</Text>
-          </Pressable>
-        </View>
-      
+      <View style={styles.bottomButtons}>
+        <Pressable
+          onPress={() => addItemToCart(route?.params?.item)}
+          style={[styles.button, { backgroundColor: "#FFC72C" }]}
+        >
+          {addedToCart ? <Text>Added to Cart</Text> : <Text>Add to Cart</Text>}
+        </Pressable>
+        <Pressable style={[styles.button, { backgroundColor: "#FFAC1C" }]}>
+          <Text>Buy Now</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
