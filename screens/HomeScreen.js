@@ -9,9 +9,11 @@ import {
   TextInput,
   Image,
   Alert,
+  ViewPropTypes,
+  LogBox
 } from "react-native";
 import PropTypes from "deprecated-react-native-prop-types";
-import { ViewPropTypes } from "deprecated-react-native-prop-types";
+
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -39,6 +41,7 @@ const HomeScreen = () => {
       console.error("Error logging out:", error);
     }
   };
+  LogBox.ignoreLogs(['Warning: ...']);
 
   const list = [
     {

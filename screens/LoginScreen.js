@@ -9,6 +9,7 @@ import {
   Pressable,
   Alert,
 } from "react-native";
+import "../ignoreWarnings";
 import { ViewPropTypes } from "deprecated-react-native-prop-types";
 import React, { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";

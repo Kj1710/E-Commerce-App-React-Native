@@ -12,6 +12,7 @@ import React from "react";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
+import "../ignoreWarnings";
 import {
   decrementQuantity,
   incementQuantity,

@@ -17,6 +17,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/CartReducer";
+import "../ignoreWarnings";
 
 const ProductInfoScreen = () => {
   const route = useRoute();

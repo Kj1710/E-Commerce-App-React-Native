@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cleanCart } from "../redux/CartReducer";
 import { useNavigation } from "@react-navigation/native";
 import RazorpayCheckout from "react-native-razorpay";
+import "../ignoreWarnings";
 
 const ConfirmationScreen = () => {
   const steps = [

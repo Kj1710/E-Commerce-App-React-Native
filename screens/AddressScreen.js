@@ -14,6 +14,8 @@ import jwt_decode from "jwt-decode";
 import { UserType } from "../UserContext";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import "../ignoreWarnings";
+
 
 const AddressScreen = () => {
   const navigation = useNavigation();

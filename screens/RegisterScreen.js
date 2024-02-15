@@ -9,6 +9,7 @@ import {
   TextInput,
   Alert,
 } from "react-native";
+import "../ignoreWarnings";
 import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";

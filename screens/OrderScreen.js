@@ -3,6 +3,7 @@ import { ViewPropTypes } from 'deprecated-react-native-prop-types'
 import React ,{useEffect} from "react";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
+import "../ignoreWarnings";
 
 const OrderScreen = () => {
     const navigation = useNavigation()

@@ -13,6 +13,7 @@ import { Ionicons, AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 import { UserType } from "../UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import "../ignoreWarnings";
 
 const ProfileScreen = () => {
   const { userId, setUserId } = useContext(UserType);
