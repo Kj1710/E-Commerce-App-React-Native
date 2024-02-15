@@ -6,7 +6,7 @@ import {
   Pressable,
   TextInput,
 } from "react-native";
-import { ViewPropTypes } from 'deprecated-react-native-prop-types'
+import { ViewPropTypes } from "deprecated-react-native-prop-types";
 import React, { useEffect, useContext, useState, useCallback } from "react";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";

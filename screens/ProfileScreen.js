@@ -6,7 +6,7 @@ import {
   ScrollView,
   Pressable,
 } from "react-native";
-import { ViewPropTypes } from 'deprecated-react-native-prop-types'
+import { ViewPropTypes } from "deprecated-react-native-prop-types";
 import React, { useLayoutEffect, useEffect, useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";

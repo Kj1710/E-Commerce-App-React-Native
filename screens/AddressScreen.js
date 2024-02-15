@@ -7,61 +7,64 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import { ViewPropTypes } from 'deprecated-react-native-prop-types'
-import React, { useEffect, useState,useContext } from "react";
+import { ViewPropTypes } from "deprecated-react-native-prop-types";
+import React, { useEffect, useState, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 import { UserType } from "../UserContext";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
 const AddressScreen = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   const [name, setName] = useState("");
   const [mobileNo, setMobileNo] = useState("");
   const [houseNo, setHouseNo] = useState("");
   const [street, setStreet] = useState("");
   const [landmark, setLandmark] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const {userId,setUserId} = useContext(UserType)
+  const { userId, setUserId } = useContext(UserType);
   useEffect(() => {
-    const fetchUser = async() => {
-        const token = await AsyncStorage.getItem("authToken");
-        const decodedToken = jwt_decode(token);
-        const userId = decodedToken.userId;
-        setUserId(userId)
-    }
+    const fetchUser = async () => {
+      const token = await AsyncStorage.getItem("authToken");
+      const decodedToken = jwt_decode(token);
+      const userId = decodedToken.userId;
+      setUserId(userId);
+    };
 
     fetchUser();
-  },[]);
-  console.log(userId)
+  }, []);
+  console.log(userId);
   const handleAddAddress = () => {
-      const address = {
-          name,
-          mobileNo,
-          houseNo,
-          street,
-          landmark,
-          postalCode
-      }
+    const address = {
+      name,
+      mobileNo,
+      houseNo,
+      street,
+      landmark,
+      postalCode,
+    };
 
-      axios.post("http://192.168.29.184:8000/addresses",{userId,address}).then((response) => {
-          Alert.alert("Success","Addresses added successfully");
-          setName("");
-          setMobileNo("");
-          setHouseNo("");
-          setStreet("");
-          setLandmark("");
-          setPostalCode("");
+    axios
+      .post("http://192.168.29.184:8000/addresses", { userId, address })
+      .then((response) => {
+        Alert.alert("Success", "Addresses added successfully");
+        setName("");
+        setMobileNo("");
+        setHouseNo("");
+        setStreet("");
+        setLandmark("");
+        setPostalCode("");
 
-          setTimeout(() => {
-            navigation.goBack();
-          },500)
-      }).catch((error) => {
-          Alert.alert("Error","Failed to add address")
-          console.log("error",error)
+        setTimeout(() => {
+          navigation.goBack();
+        }, 500);
       })
-  }
+      .catch((error) => {
+        Alert.alert("Error", "Failed to add address");
+        console.log("error", error);
+      });
+  };
   return (
     <ScrollView style={{ marginTop: 50 }}>
       <View style={{ height: 50, backgroundColor: "#00CED1" }} />
@@ -198,7 +201,7 @@ const AddressScreen = () => {
         </View>
 
         <Pressable
-        onPress={handleAddAddress}
+          onPress={handleAddAddress}
           style={{
             backgroundColor: "#FFC72C",
             padding: 19,

@@ -15,7 +15,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { ViewPropTypes } from 'deprecated-react-native-prop-types'
+import { ViewPropTypes } from "deprecated-react-native-prop-types";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -53,13 +53,15 @@ const RegisterScreen = () => {
   };
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white", alignItems: "center",marginTop:50  }}
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+        alignItems: "center",
+        marginTop: 50,
+      }}
     >
-       <View>
-        <Image
-          style={{ width: 200, height: 180 }}
-          source={logoImage}
-        />
+      <View>
+        <Image style={{ width: 200, height: 180 }} source={logoImage} />
       </View>
 
       <KeyboardAvoidingView>

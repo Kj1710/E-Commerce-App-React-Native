@@ -7,9 +7,10 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Pressable,
+  Alert,
 } from "react-native";
-import { ViewPropTypes } from 'deprecated-react-native-prop-types'
-import React, { useState,useEffect } from "react";
+import { ViewPropTypes } from "deprecated-react-native-prop-types";
+import React, { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -56,13 +57,15 @@ const LoginScreen = () => {
   };
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white", alignItems: "center",marginTop:50 }}
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+        alignItems: "center",
+        marginTop: 50,
+      }}
     >
       <View>
-        <Image
-          style={{ width: 200, height: 180 }}
-          source={logoImage}
-        />
+        <Image style={{ width: 200, height: 180 }} source={logoImage} />
       </View>
 
       <KeyboardAvoidingView>

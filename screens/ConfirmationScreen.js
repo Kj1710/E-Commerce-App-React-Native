@@ -25,6 +25,7 @@ const ConfirmationScreen = () => {
   ];
   const navigation = useNavigation();
   const [currentStep, setCurrentStep] = useState(0);
+  const { userId, setUserId } = useContext(UserType);
   const cart = useSelector((state) => state.cart.cart);
   const total = cart
     ?.map((item) => item.price * item.quantity)
@@ -45,7 +46,7 @@ const ConfirmationScreen = () => {
   //   }
   // };
   const dispatch = useDispatch();
-  const [selectedAddress, setSelectedAdress] = useState("");
+
   const [option, setOption] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const handlePlaceOrder = async () => {
@@ -78,11 +79,11 @@ const ConfirmationScreen = () => {
         description: "Adding To Wallet",
         currency: "INR",
         name: "Amazon",
-        key: "rzp_test_E3GWYimxN7YMk8",
+        key: "rzp_test_yxT3Avn0YXrCJ2",
         amount: total * 100,
         prefill: {
           email: "void@razorpay.com",
-          contact: "9191919191",
+          contact: "9076221330",
           name: "RazorPay Software",
         },
         theme: { color: "#F37254" },
@@ -455,35 +456,6 @@ const ConfirmationScreen = () => {
 
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 8,
-              backgroundColor: "white",
-              padding: 8,
-              borderColor: "#D0D0D0",
-              borderWidth: 1,
-              marginTop: 10,
-            }}
-          >
-            <View>
-              <Text style={{ fontSize: 17, fontWeight: "bold" }}>
-                Save 5% and never run out
-              </Text>
-              <Text style={{ fontSize: 15, color: "gray", marginTop: 5 }}>
-                Turn on auto deliveries
-              </Text>
-            </View>
-
-            <MaterialIcons
-              name="keyboard-arrow-right"
-              size={24}
-              color="black"
-            />
-          </View>
-
-          <View
-            style={{
               backgroundColor: "white",
               padding: 8,
               borderColor: "#D0D0D0",
@@ -502,7 +474,7 @@ const ConfirmationScreen = () => {
               }}
             >
               <Text style={{ fontSize: 16, fontWeight: "500", color: "gray" }}>
-                Items
+                Items Value
               </Text>
 
               <Text style={{ color: "gray", fontSize: 16 }}>₹{total}</Text>
@@ -517,7 +489,7 @@ const ConfirmationScreen = () => {
               }}
             >
               <Text style={{ fontSize: 16, fontWeight: "500", color: "gray" }}>
-                Delivery
+                Delivery Charge
               </Text>
 
               <Text style={{ color: "gray", fontSize: 16 }}>₹0</Text>
@@ -560,7 +532,11 @@ const ConfirmationScreen = () => {
           </View>
 
           <Pressable
-            onPress={handlePlaceOrder}
+            onPress={() => {
+              navigation.navigate("Order");
+              dispatch(cleanCart());
+              console.log("order created successfully");
+            }}
             style={{
               backgroundColor: "#FFC72C",
               padding: 10,

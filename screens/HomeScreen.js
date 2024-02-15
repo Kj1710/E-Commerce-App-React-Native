@@ -8,6 +8,7 @@ import {
   Pressable,
   TextInput,
   Image,
+  Alert,
 } from "react-native";
 import PropTypes from "deprecated-react-native-prop-types";
 import { ViewPropTypes } from "deprecated-react-native-prop-types";
@@ -290,15 +291,14 @@ const HomeScreen = () => {
             <Text></Text>
             <AntDesign name="shoppingcart" size={24} color="black" />
           </View>
-         
+
           <View style={{ flexDirection: "row" }}>
             <Pressable
-
               onPress={() => setSelectedOption("All")}
               style={({ pressed }) => [
                 styles.option,
                 {
-                  borderBottomWidth: selectedOption === "All" ? 3: 0, // Add border bottom when selected
+                  borderBottomWidth: selectedOption === "All" ? 3 : 0, // Add border bottom when selected
                   borderBottomColor: "orange", // Color of the underline
                 },
                 pressed && { opacity: 0.8 }, // Reduce opacity when pressed
@@ -363,7 +363,7 @@ const HomeScreen = () => {
               >
                 {deals.map((item, index) => (
                   <Pressable
-                  key={item._id} 
+                    key={item._id}
                     onPress={() =>
                       navigation.navigate("Info", {
                         id: item.id,
@@ -505,7 +505,6 @@ const HomeScreen = () => {
                   ?.filter((item) => item.category === category)
                   .map((item, index) => (
                     <ProductItem
-                    
                       item={item}
                       key={index}
                       style={{ width: "20%" }}
@@ -559,7 +558,7 @@ const HomeScreen = () => {
             {/* already added addresses */}
             {addresses?.map((item, index) => (
               <Pressable
-              key={item._id} 
+                key={item._id}
                 onPress={() => setSelectedAdress(item)}
                 style={{
                   width: 140,
