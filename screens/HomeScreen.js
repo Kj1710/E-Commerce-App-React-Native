@@ -290,8 +290,10 @@ const HomeScreen = () => {
             <Text></Text>
             <AntDesign name="shoppingcart" size={24} color="black" />
           </View>
+         
           <View style={{ flexDirection: "row" }}>
             <Pressable
+
               onPress={() => setSelectedOption("All")}
               style={({ pressed }) => [
                 styles.option,
@@ -361,6 +363,7 @@ const HomeScreen = () => {
               >
                 {deals.map((item, index) => (
                   <Pressable
+                  key={item._id} 
                     onPress={() =>
                       navigation.navigate("Info", {
                         id: item.id,
@@ -502,6 +505,7 @@ const HomeScreen = () => {
                   ?.filter((item) => item.category === category)
                   .map((item, index) => (
                     <ProductItem
+                    
                       item={item}
                       key={index}
                       style={{ width: "20%" }}
@@ -555,6 +559,7 @@ const HomeScreen = () => {
             {/* already added addresses */}
             {addresses?.map((item, index) => (
               <Pressable
+              key={item._id} 
                 onPress={() => setSelectedAdress(item)}
                 style={{
                   width: 140,

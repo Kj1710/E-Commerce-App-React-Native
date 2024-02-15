@@ -1,5 +1,12 @@
-import { StyleSheet, Text, View, ScrollView, Pressable,Alert } from "react-native";
-import { ViewPropTypes } from 'deprecated-react-native-prop-types'
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Pressable,
+  Alert,
+} from "react-native";
+import { ViewPropTypes } from "deprecated-react-native-prop-types";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserType } from "../UserContext";
@@ -12,34 +19,31 @@ import RazorpayCheckout from "react-native-razorpay";
 
 const ConfirmationScreen = () => {
   const steps = [
-    { title: "Address", content: "Address Form" },
     { title: "Delivery", content: "Delivery Options" },
     { title: "Payment", content: "Payment Details" },
     { title: "Place Order", content: "Order Summary" },
   ];
   const navigation = useNavigation();
   const [currentStep, setCurrentStep] = useState(0);
-  const [addresses, setAddresses] = useState([]);
-  const { userId, setUserId } = useContext(UserType);
   const cart = useSelector((state) => state.cart.cart);
   const total = cart
     ?.map((item) => item.price * item.quantity)
     .reduce((curr, prev) => curr + prev, 0);
-  useEffect(() => {
-    fetchAddresses();
-  }, []);
-  const fetchAddresses = async () => {
-    try {
-      const response = await axios.get(
-        `http://192.168.29.184:8000/addresses/${userId}`
-      );
-      const { addresses } = response.data;
+  // useEffect(() => {
+  //   fetchAddresses();
+  // }, []);
+  // const fetchAddresses = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://192.168.29.184:8000/addresses/${userId}`
+  //     );
+  //     const { addresses } = response.data;
 
-      setAddresses(addresses);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  //     setAddresses(addresses);
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
   const dispatch = useDispatch();
   const [selectedAddress, setSelectedAdress] = useState("");
   const [option, setOption] = useState(false);
@@ -50,7 +54,6 @@ const ConfirmationScreen = () => {
         userId: userId,
         cartItems: cart,
         totalPrice: total,
-        shippingAddress: selectedAddress,
         paymentMethod: selectedOption,
       };
 
@@ -87,13 +90,13 @@ const ConfirmationScreen = () => {
 
       const data = await RazorpayCheckout.open(options);
 
-      console.log(data)
+      console.log(data);
 
       const orderData = {
         userId: userId,
         cartItems: cart,
         totalPrice: total,
-        shippingAddress: selectedAddress,
+        // shippingAddress: selectedAddress,
         paymentMethod: "card",
       };
 
@@ -168,7 +171,7 @@ const ConfirmationScreen = () => {
         </View>
       </View>
 
-      {currentStep == 0 && (
+      {/* {currentStep == 0 && (
         <View style={{ marginHorizontal: 20 }}>
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>
             Select Delivery Address
@@ -177,6 +180,7 @@ const ConfirmationScreen = () => {
           <Pressable>
             {addresses?.map((item, index) => (
               <Pressable
+              key={item._id} 
                 style={{
                   borderWidth: 1,
                   borderColor: "#D0D0D0",
@@ -305,9 +309,9 @@ const ConfirmationScreen = () => {
             ))}
           </Pressable>
         </View>
-      )}
+      )} */}
 
-      {currentStep == 1 && (
+      {currentStep == 0 && (
         <View style={{ marginHorizontal: 20 }}>
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>
             Choose your delivery options
@@ -345,7 +349,7 @@ const ConfirmationScreen = () => {
           </View>
 
           <Pressable
-            onPress={() => setCurrentStep(2)}
+            onPress={() => setCurrentStep(1)}
             style={{
               backgroundColor: "#FFC72C",
               padding: 10,
@@ -360,7 +364,7 @@ const ConfirmationScreen = () => {
         </View>
       )}
 
-      {currentStep == 2 && (
+      {currentStep == 1 && (
         <View style={{ marginHorizontal: 20 }}>
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>
             Select your payment Method
@@ -430,7 +434,7 @@ const ConfirmationScreen = () => {
             <Text>UPI / Credit or debit card</Text>
           </View>
           <Pressable
-            onPress={() => setCurrentStep(3)}
+            onPress={() => setCurrentStep(2)}
             style={{
               backgroundColor: "#FFC72C",
               padding: 10,
@@ -445,7 +449,7 @@ const ConfirmationScreen = () => {
         </View>
       )}
 
-      {currentStep === 3 && selectedOption === "cash" && (
+      {currentStep === 2 && selectedOption === "cash" && (
         <View style={{ marginHorizontal: 20 }}>
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>Order Now</Text>
 
@@ -487,7 +491,7 @@ const ConfirmationScreen = () => {
               marginTop: 10,
             }}
           >
-            <Text>Shipping to {selectedAddress?.name}</Text>
+            {/* <Text>Shipping to {selectedAddress?.name}</Text> */}
 
             <View
               style={{
