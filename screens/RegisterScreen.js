@@ -16,7 +16,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { ViewPropTypes } from "deprecated-react-native-prop-types";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -31,7 +30,6 @@ const RegisterScreen = () => {
       password: password,
     };
 
-    // send a POST  request to the backend API to register the user
     axios
       .post("http://192.168.29.184:8000/register", user)
       .then((response) => {
@@ -52,6 +50,7 @@ const RegisterScreen = () => {
         console.log("registration failed", error);
       });
   };
+  
   return (
     <SafeAreaView
       style={{

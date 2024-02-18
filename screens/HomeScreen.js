@@ -10,14 +10,10 @@ import {
   Image,
   Alert,
   ViewPropTypes,
-  LogBox
+  LogBox,
 } from "react-native";
-import PropTypes from "deprecated-react-native-prop-types";
-
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { SliderBox } from "react-native-image-slider-box";
@@ -41,7 +37,7 @@ const HomeScreen = () => {
       console.error("Error logging out:", error);
     }
   };
-  LogBox.ignoreLogs(['Warning: ...']);
+  LogBox.ignoreLogs(["Warning: ..."]);
 
   const list = [
     {
@@ -272,7 +268,7 @@ const HomeScreen = () => {
 
     fetchUser();
   }, []);
-  console.log("address", addresses);
+
   return (
     <>
       <SafeAreaView
@@ -301,10 +297,10 @@ const HomeScreen = () => {
               style={({ pressed }) => [
                 styles.option,
                 {
-                  borderBottomWidth: selectedOption === "All" ? 3 : 0, // Add border bottom when selected
-                  borderBottomColor: "orange", // Color of the underline
+                  borderBottomWidth: selectedOption === "All" ? 3 : 0, 
+                  borderBottomColor: "orange",
                 },
-                pressed && { opacity: 0.8 }, // Reduce opacity when pressed
+                pressed && { opacity: 0.8 },
               ]}
             >
               <Text style={styles.optionText}>All</Text>
@@ -314,17 +310,17 @@ const HomeScreen = () => {
               style={({ pressed }) => [
                 styles.option,
                 {
-                  borderBottomWidth: selectedOption === "Categories" ? 3 : 0, // Add border bottom when selected
-                  borderBottomColor: "orange", // Color of the underline
+                  borderBottomWidth: selectedOption === "Categories" ? 3 : 0, 
+                  borderBottomColor: "orange", 
                 },
-                pressed && { opacity: 0.8 }, // Reduce opacity when pressed
+                pressed && { opacity: 0.8 }, 
               ]}
             >
               <Text style={styles.optionText}>Categories</Text>
             </Pressable>
           </View>
 
-          {/* Conditionally render based on selected option */}
+          
           {selectedOption === "All" ? (
             <>
               <Text

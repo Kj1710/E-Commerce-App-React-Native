@@ -6,7 +6,6 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import { ViewPropTypes } from "deprecated-react-native-prop-types";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserType } from "../UserContext";
@@ -31,21 +30,7 @@ const ConfirmationScreen = () => {
   const total = cart
     ?.map((item) => item.price * item.quantity)
     .reduce((curr, prev) => curr + prev, 0);
-  // useEffect(() => {
-  //   fetchAddresses();
-  // }, []);
-  // const fetchAddresses = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://192.168.29.184:8000/addresses/${userId}`
-  //     );
-  //     const { addresses } = response.data;
 
-  //     setAddresses(addresses);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
   const dispatch = useDispatch();
 
   const [option, setOption] = useState(false);
@@ -98,7 +83,6 @@ const ConfirmationScreen = () => {
         userId: userId,
         cartItems: cart,
         totalPrice: total,
-        // shippingAddress: selectedAddress,
         paymentMethod: "card",
       };
 
@@ -172,146 +156,6 @@ const ConfirmationScreen = () => {
           ))}
         </View>
       </View>
-
-      {/* {currentStep == 0 && (
-        <View style={{ marginHorizontal: 20 }}>
-          <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-            Select Delivery Address
-          </Text>
-
-          <Pressable>
-            {addresses?.map((item, index) => (
-              <Pressable
-              key={item._id} 
-                style={{
-                  borderWidth: 1,
-                  borderColor: "#D0D0D0",
-                  padding: 10,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 5,
-                  paddingBottom: 17,
-                  marginVertical: 7,
-                  borderRadius: 6,
-                }}
-              >
-                {selectedAddress && selectedAddress._id === item?._id ? (
-                  <FontAwesome5 name="dot-circle" size={20} color="#008397" />
-                ) : (
-                  <Entypo
-                    onPress={() => setSelectedAdress(item)}
-                    name="circle"
-                    size={20}
-                    color="gray"
-                  />
-                )}
-
-                <View style={{ marginLeft: 6 }}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: 3,
-                    }}
-                  >
-                    <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-                      {item?.name}
-                    </Text>
-                    <Entypo name="location-pin" size={24} color="red" />
-                  </View>
-
-                  <Text style={{ fontSize: 15, color: "#181818" }}>
-                    {item?.houseNo}, {item?.landmark}
-                  </Text>
-
-                  <Text style={{ fontSize: 15, color: "#181818" }}>
-                    {item?.street}
-                  </Text>
-
-                  <Text style={{ fontSize: 15, color: "#181818" }}>
-                    India, Bangalore
-                  </Text>
-
-                  <Text style={{ fontSize: 15, color: "#181818" }}>
-                    phone No : {item?.mobileNo}
-                  </Text>
-                  <Text style={{ fontSize: 15, color: "#181818" }}>
-                    pin code : {item?.postalCode}
-                  </Text>
-
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: 10,
-                      marginTop: 7,
-                    }}
-                  >
-                    <Pressable
-                      style={{
-                        backgroundColor: "#F5F5F5",
-                        paddingHorizontal: 10,
-                        paddingVertical: 6,
-                        borderRadius: 5,
-                        borderWidth: 0.9,
-                        borderColor: "#D0D0D0",
-                      }}
-                    >
-                      <Text>Edit</Text>
-                    </Pressable>
-
-                    <Pressable
-                      style={{
-                        backgroundColor: "#F5F5F5",
-                        paddingHorizontal: 10,
-                        paddingVertical: 6,
-                        borderRadius: 5,
-                        borderWidth: 0.9,
-                        borderColor: "#D0D0D0",
-                      }}
-                    >
-                      <Text>Remove</Text>
-                    </Pressable>
-
-                    <Pressable
-                      style={{
-                        backgroundColor: "#F5F5F5",
-                        paddingHorizontal: 10,
-                        paddingVertical: 6,
-                        borderRadius: 5,
-                        borderWidth: 0.9,
-                        borderColor: "#D0D0D0",
-                      }}
-                    >
-                      <Text>Set as Default</Text>
-                    </Pressable>
-                  </View>
-
-                  <View>
-                    {selectedAddress && selectedAddress._id === item?._id && (
-                      <Pressable
-                        onPress={() => setCurrentStep(1)}
-                        style={{
-                          backgroundColor: "#008397",
-                          padding: 10,
-                          borderRadius: 20,
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginTop: 10,
-                        }}
-                      >
-                        <Text style={{ textAlign: "center", color: "white" }}>
-                          Deliver to this Address
-                        </Text>
-                      </Pressable>
-                    )}
-                  </View>
-                </View>
-              </Pressable>
-            ))}
-          </Pressable>
-        </View>
-      )} */}
 
       {currentStep == 0 && (
         <View style={{ marginHorizontal: 20 }}>
@@ -464,8 +308,6 @@ const ConfirmationScreen = () => {
               marginTop: 10,
             }}
           >
-            {/* <Text>Shipping to {selectedAddress?.name}</Text> */}
-
             <View
               style={{
                 flexDirection: "row",

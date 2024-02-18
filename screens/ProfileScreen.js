@@ -88,16 +88,15 @@ const ProfileScreen = () => {
         console.log("error", error);
       }
     };
-
     fetchOrders();
   }, []);
   console.log("orders", orders);
+
   return (
     <ScrollView style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
       <Text style={{ fontSize: 16, fontWeight: "bold" }}>
         Welcome {user?.name}
       </Text>
-
       <View
         style={{
           flexDirection: "row",
@@ -179,7 +178,7 @@ const ProfileScreen = () => {
               }}
               key={order._id}
             >
-              {/* Render the order information here */}
+             
               {order.products.slice(0, 1)?.map((product) => (
                 <View style={{ marginVertical: 10 }} key={product._id}>
                   <Image

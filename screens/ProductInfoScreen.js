@@ -9,9 +9,8 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { ViewPropTypes } from "deprecated-react-native-prop-types";
 import React, { useState } from "react";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";

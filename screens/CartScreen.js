@@ -7,7 +7,6 @@ import {
   TextInput,
   Image,
 } from "react-native";
-import { ViewPropTypes } from 'deprecated-react-native-prop-types'
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -145,10 +144,7 @@ const CartScreen = () => {
                   }}
                 />
                 <Text style={{ color: "green" }}>In Stock</Text>
-                {/* <Text style={{ fontWeight: "500", marginTop: 6 }}>
-                  {item?.rating?.rate} ratings
-                </Text> */}
-              </View>
+               </View>
             </Pressable>
 
             <Pressable
