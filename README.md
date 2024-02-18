@@ -16,13 +16,18 @@ Built with **React Native**! This innovative platform combines the power of 💸
 Watch our app in action on YouTube: [E-commerce App Demo](https://youtu.be/PY4UPgrNyu4)
 
 ## ScreenShot:
-![Screenshot 2024-02-17 at 10 37 48 PM](https://github.com/Kj1710/tp1/assets/112983519/e9f2e71f-9ee3-4194-9e88-e705a6903766)
+![Screenshot 2024-02-17 at 10 37 48 PM](https://github.com/Kj1710/E-Commerce-App-React-Native/assets/112983519/16aec05c-d40a-49cd-a48e-f093b0f479f0)
 
-![Screenshot 2024-02-17 at 10 38 48 PM](https://github.com/Kj1710/tp1/assets/112983519/af2beca9-d7f8-4147-9dd5-a3ecac874a73)
+![Screenshot 2024-02-17 at 10 38 48 PM](https://github.com/Kj1710/E-Commerce-App-React-Native/assets/112983519/7d70ea3c-3d89-47d3-825c-50469943a6f8)
+)
 
-![Screenshot 2024-02-17 at 10 39 00 PM](https://github.com/Kj1710/tp1/assets/112983519/8ea8f5db-87d6-43a2-b250-4f524c800b94)
+![Screenshot 2024-02-17 at 10 39 00 PM](https://github.com/Kj1710/E-Commerce-App-React-Native/assets/112983519/2421cc3b-678d-4ecc-abdb-7d91341d7418)
 
-![Screenshot 2024-02-17 at 10 39 11 PM](https://github.com/Kj1710/tp1/assets/112983519/a78927f8-ec36-4887-87d7-2db7fe25b24f)
+![Screenshot 2024-02-17 at 10 39 11 PM](https://github.com/Kj1710/E-Commerce-App-React-Native/assets/112983519/73dcc063-4c37-4a0a-b24d-928a69908dfb)
+
+
+
+
 
 
 ## Contact:
